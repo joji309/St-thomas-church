@@ -1,0 +1,20 @@
+{
+  "name": "st-thomas-church",
+  "version": "1.0.0",
+  "description": "St. Thomas Church Website",
+  "private": true,
+  "scripts": {
+    "dev": "cd frontend && npm run dev",
+    "build": "cd frontend && npm run build",
+    "preview": "cd frontend && npm run preview",
+    "setup": "cd backend && python setup_admin.py",
+    "install-deps": "npm install && cd backend && pip install -r requirements.txt && cd ../frontend && npm install",
+    "vercel-build": "cd frontend && npm install && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": "18.x || 20.x"
+  }
+}

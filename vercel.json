@@ -1,0 +1,61 @@
+{
+  "buildCommand": "npm run vercel-build && pip install -r backend/requirements.txt",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "npm install --prefix frontend && pip install -r backend/requirements.txt",
+  "functions": {
+    "api/index.py": {
+      "runtime": "python3.12",
+      "memory": 3008,
+      "maxDuration": 60
+    }
+  },
+  "routes": [
+    {
+      "src": "^/api(/.*)?$",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "^/media(/.*)?$",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "^/((?!api|media).*)$",
+      "dest": "/"
+    }
+  ],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "server.settings",
+    "PYTHONUNBUFFERED": "1",
+    "DEBUG": "False"
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    }
+  ]
+}
