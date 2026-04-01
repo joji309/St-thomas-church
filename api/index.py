@@ -22,9 +22,10 @@ from django.core.wsgi import get_wsgi_application
 app = get_wsgi_application()
 
 
-def handler(request):
+def handler(request, response):
     """
-    Vercel serverless function handler
+    Vercel serverless function handler (updated for Python 3.12)
     Routes all requests through Django WSGI
     """
-    return app(request)
+    # Call the Django WSGI app
+    return app(request, response)
