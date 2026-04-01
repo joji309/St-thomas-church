@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import ErrorBoundary from './components/ErrorBoundary';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -30,28 +31,30 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div className="flex flex-col min-h-screen">
-        <Navbar settings={settings} />
-        <main className="flex-grow">
-          <PageTransition>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/prayer" element={<PrayerRequest />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogDetail />} />
-              <Route path="/news" element={<News />} />
-              <Route path="/contact" element={<Contact />} />
+    <ErrorBoundary>
+      <Router>
+        <div className="flex flex-col min-h-screen">
+          <Navbar settings={settings} />
+          <main className="flex-grow">
+            <PageTransition>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/gallery" element={<Gallery />} />
+                <Route path="/prayer" element={<PrayerRequest />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogDetail />} />
+                <Route path="/news" element={<News />} />
+                <Route path="/contact" element={<Contact />} />
 
-            </Routes>
+              </Routes>
 
-          </PageTransition>
-        </main>
-        <Footer settings={settings} />
-      </div>
-    </Router>
+            </PageTransition>
+          </main>
+          <Footer settings={settings} />
+        </div>
+      </Router>
+    </ErrorBoundary>
   );
 }
 
