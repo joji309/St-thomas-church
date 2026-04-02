@@ -9,7 +9,7 @@
     "preview": "cd frontend && npm run preview",
     "setup": "cd backend && python setup_admin.py",
     "install-deps": "npm install && cd backend && pip install -r requirements.txt && cd ../frontend && npm install",
-    "vercel-build": "cd frontend && npm install && npm run build"
+    "render-build": "pip install -r backend/requirements.txt && cd frontend && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
