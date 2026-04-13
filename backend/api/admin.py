@@ -176,12 +176,12 @@ class BlogPostAdmin(admin.ModelAdmin):
 class ContactInfoAdmin(admin.ModelAdmin):
     list_display = ('address', 'phone', 'email', 'office_hours')
     fieldsets = (
-        ('Contact Details', {
+        (None, {
             'fields': ('address', 'phone', 'email', 'office_hours'),
         }),
-        ('Map', {
+        ('Google Maps Embed Code', {
             'fields': ('google_maps_embed',),
-            'description': 'Paste the Google Maps embed URL here.',
+            'description': 'Paste the full <iframe> snippet here.',
         }),
     )
 
