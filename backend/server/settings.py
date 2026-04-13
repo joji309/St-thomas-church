@@ -33,8 +33,8 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv(
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'jazzmin',
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -278,8 +278,8 @@ JAZZMIN_UI_TWEAKS = {
     'sidebar_nav_compact_style': False,
     'sidebar_nav_legacy_style': False,
     'sidebar_nav_flat_style': False,
-    'theme': 'lumen',
-    'dark_mode_theme': 'lumen',
+    'theme': 'flatly',
+    'dark_mode_theme': None,
     'button_classes': {
         'primary': 'btn-primary',
         'secondary': 'btn-secondary',

@@ -175,7 +175,19 @@ class BlogPostAdmin(admin.ModelAdmin):
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
-    fields = ('page_title', 'header_image', 'header_image_url', 'address', 'phone', 'email', 'office_hours', 'google_maps_embed')
+    list_display = ('address', 'phone', 'email')
+    save_on_top = True
+    fieldsets = (
+        ('Page Content', {
+            'fields': ('page_title', 'header_image', 'header_image_url'),
+        }),
+        ('Contact Details', {
+            'fields': ('address', 'phone', 'email', 'office_hours'),
+        }),
+        ('Google Maps', {
+            'fields': ('google_maps_embed',),
+        }),
+    )
     
     def has_change_permission(self, request, obj=None):
         return True
