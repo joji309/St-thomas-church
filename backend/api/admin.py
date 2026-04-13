@@ -175,6 +175,7 @@ class BlogPostAdmin(admin.ModelAdmin):
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
     list_display = ('address', 'phone', 'email', 'office_hours')
+    save_on_top = True
     fieldsets = (
         (None, {
             'fields': ('address', 'phone', 'email', 'office_hours', 'google_maps_embed'),
@@ -223,6 +224,7 @@ class PrayerRequestAdmin(admin.ModelAdmin):
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
     list_display = ('site_name', 'site_tagline')
+    save_on_top = True
     fieldsets = (
         ('Branding', {
             'fields': ('site_name', 'site_tagline', 'logo', 'logo_url', 'favicon'),
