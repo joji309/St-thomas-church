@@ -105,10 +105,13 @@ const Contact = () => {
                       __html: info.google_maps_embed.replace(/width="[^"]*"/, 'width="100%"').replace(/height="[^"]*"/, 'height="100%"') 
                     }} 
                   />
-                ) : (
+                ) : info.google_maps_embed ? (
+                  /* If it's a raw URL, we try to put it in an iframe */
                   <iframe
-                    title="St. Thomas Church, Tivim, Goa location map"
-                    src={info.google_maps_embed}
+                    title="Church Map"
+                    src={info.google_maps_embed.includes('google.com/maps') && !info.google_maps_embed.includes('embed') 
+                      ? info.google_maps_embed.replace('/maps/', '/maps/embed?pb=') // Simple attempt to fix raw map URLs
+                      : info.google_maps_embed}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -116,6 +119,10 @@ const Contact = () => {
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                   />
+                ) : (
+                  <div className="w-full h-full bg-navy-blue/10 flex items-center justify-center text-navy-blue/30 font-sans italic">
+                    Map will be displayed here
+                  </div>
                 )}
               </div>
               <p className="text-sm text-navy-blue/50 font-sans mt-3 flex items-center space-x-1">
