@@ -177,11 +177,8 @@ class ContactInfoAdmin(admin.ModelAdmin):
     list_display = ('address', 'phone', 'email', 'office_hours')
     fieldsets = (
         (None, {
-            'fields': ('address', 'phone', 'email', 'office_hours'),
-        }),
-        ('Google Maps Embed Code', {
-            'fields': ('google_maps_embed',),
-            'description': 'Paste the full <iframe> snippet here.',
+            'fields': ('address', 'phone', 'email', 'office_hours', 'google_maps_embed'),
+            'description': 'Enter your contact details and paste the full Google Maps <iframe> code below.'
         }),
     )
 
