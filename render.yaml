@@ -1,17 +1,41 @@
+databases:
+  - name: st-thomas-db
+    databaseName: st_thomas_church
+    user: st_thomas_user
+    plan: free # Change to 'starter' if you need more features
+
 services:
   - type: web
     name: st-thomas-church
     env: python
-    plan: free
+    plan: free # Change to 'starter' if you need more features
     runtime: python-3.11
     buildCommand: >
       pip install -r backend/requirements.txt &&
       cd frontend &&
       npm install &&
-      npm run build
+      npm run build &&
+      cd ../backend &&
+      python manage.py collectstatic --noinput
     startCommand: >
       cd backend &&
+      python manage.py migrate &&
       gunicorn server.wsgi:application
       --bind 0.0.0.0:$PORT
       --workers 2
       --timeout 60
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: st-thomas-db
+          property: connectionString
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: "*" # Updated automatically by Render if configured
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://st-thomas-church.onrender.com" # Update after deploy
+      - key: DB_ENGINE
+        value: "django.db.backends.postgresql"

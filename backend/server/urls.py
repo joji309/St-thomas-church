@@ -25,12 +25,10 @@ urlpatterns = [
     path('api/', include('api.urls')),
 ]
 
-# Serve built React assets
-if settings.DEBUG:
-    urlpatterns += static('/assets/', document_root=settings.BASE_DIR / '../frontend/dist/assets/')
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media files (in development always, in production if requested/needed)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-# Catch-all for React fallback
+# Catch-all for React fallback (must be at the end)
 urlpatterns += [
     re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
 ]
