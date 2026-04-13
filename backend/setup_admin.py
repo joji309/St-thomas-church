@@ -33,11 +33,11 @@ def main():
         User.objects.create_superuser(
             username='admin',
             email='admin@example.com',
-            password='change-this-password-immediately'
+            password='admin12345'
         )
         print("✅ Superuser created!")
         print("   Username: admin")
-        print("   Password: change-this-password-immediately")
+        print("   Password: admin12345")
         print("   ⚠️  Change this password immediately in the Django admin!")
     else:
         print("✅ Superuser already exists")
