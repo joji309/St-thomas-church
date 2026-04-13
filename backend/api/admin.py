@@ -175,26 +175,13 @@ class BlogPostAdmin(admin.ModelAdmin):
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
+    change_form_template = 'admin/change_form.html' # This forces the standard working buttons
     list_display = ('address', 'phone', 'email')
     save_on_top = True
-    save_as_continue = True  # Enables "Save and continue editing"
+    save_as_continue = True
     
-    fieldsets = (
-        ('Page Content', {
-            'fields': ('page_title', 'header_image', 'header_image_url'),
-        }),
-        ('Contact Details', {
-            'fields': ('address', 'phone', 'email', 'office_hours'),
-        }),
-        ('Google Maps', {
-            'fields': ('google_maps_embed',),
-        }),
-    )
+    fields = ('page_title', 'header_image', 'header_image_url', 'address', 'phone', 'email', 'office_hours', 'google_maps_embed')
     
-    # We unlock these to ensure ALL buttons (Save, Delete, Add another) appear exactly like your screenshot
-    def has_add_permission(self, request):
-        return True
-
     def has_change_permission(self, request, obj=None):
         return True
 
