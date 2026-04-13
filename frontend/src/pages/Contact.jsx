@@ -97,17 +97,26 @@ const Contact = () => {
             {/* Map */}
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
               <h2 className="text-3xl font-serif font-bold text-navy-blue mb-6">Find Us Here</h2>
-              <div className="rounded-2xl overflow-hidden shadow-lg h-96">
-                <iframe
-                  title="St. Thomas Church, Tivim, Goa location map"
-                  src={info.google_maps_embed}
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
+              <div className="rounded-2xl overflow-hidden shadow-lg h-96 relative map-container">
+                {info.google_maps_embed?.startsWith('<iframe') ? (
+                  <div 
+                    className="w-full h-full"
+                    dangerouslySetInnerHTML={{ 
+                      __html: info.google_maps_embed.replace(/width="[^"]*"/, 'width="100%"').replace(/height="[^"]*"/, 'height="100%"') 
+                    }} 
+                  />
+                ) : (
+                  <iframe
+                    title="St. Thomas Church, Tivim, Goa location map"
+                    src={info.google_maps_embed}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                )}
               </div>
               <p className="text-sm text-navy-blue/50 font-sans mt-3 flex items-center space-x-1">
                 <MapPin className="h-4 w-4 text-liturgical-gold" />

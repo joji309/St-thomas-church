@@ -256,7 +256,7 @@ class ContactInfo(models.Model):
     phone = models.CharField(max_length=50, default='+91 832 226 xxxx')
     email = models.EmailField(default='stthomas.tivim@example.com')
     office_hours = models.CharField(max_length=100, default='Mon–Sat, 9 AM – 5 PM')
-    google_maps_embed = models.URLField(max_length=1000, blank=True, help_text="Google Maps embed URL")
+    google_maps_embed = models.TextField(blank=True, help_text="Paste the full Google Maps <iframe> code here")
 
     class Meta:
         verbose_name = 'Contact Info'
