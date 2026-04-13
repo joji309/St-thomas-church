@@ -258,8 +258,6 @@ JAZZMIN_SETTINGS = {
     'related_modal_active': True,
     'use_google_fonts_cdn': True,
     'show_ui_builder': False,
-    # Use horizontal tabs for fieldsets
-    'changeform_format': 'horizontal_tabs',
 }
 
 JAZZMIN_UI_TWEAKS = {
