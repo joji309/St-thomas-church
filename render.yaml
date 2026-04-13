@@ -9,7 +9,7 @@ services:
     name: st-thomas-church
     env: python
     plan: free # Change to 'starter' if you need more features
-    runtime: python-3.11
+    runtime: python
     buildCommand: >
       pip install -r backend/requirements.txt &&
       cd frontend &&
@@ -25,6 +25,8 @@ services:
       --workers 2
       --timeout 60
     envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
       - key: DATABASE_URL
         fromDatabase:
           name: st-thomas-db
