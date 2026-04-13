@@ -173,23 +173,6 @@ class BlogPostAdmin(admin.ModelAdmin):
 # ═══════════════════════════════════════════════════════════════
 
 
-@admin.register(ContactInfo)
-class ContactInfoAdmin(admin.ModelAdmin):
-    change_form_template = 'admin/change_form.html' # This forces the standard working buttons
-    list_display = ('address', 'phone', 'email')
-    save_on_top = True
-    save_as_continue = True
-    
-    fields = ('page_title', 'header_image', 'header_image_url', 'address', 'phone', 'email', 'office_hours', 'google_maps_embed')
-    
-    def has_change_permission(self, request, obj=None):
-        return True
-
-    def has_delete_permission(self, request, obj=None):
-        return True
-
-    def has_view_permission(self, request, obj=None):
-        return True
 
 
 @admin.register(ContactMessage)
