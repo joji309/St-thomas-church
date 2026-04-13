@@ -175,7 +175,7 @@ class BlogPostAdmin(admin.ModelAdmin):
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
-    pass
+    fields = ('page_title', 'header_image', 'header_image_url', 'address', 'phone', 'email', 'office_hours', 'google_maps_embed')
 
 
 @admin.register(ContactMessage)
