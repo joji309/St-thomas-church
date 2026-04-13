@@ -172,17 +172,6 @@ class BlogPostAdmin(admin.ModelAdmin):
 # CONTACT
 # ═══════════════════════════════════════════════════════════════
 
-@admin.register(ContactInfo)
-class ContactInfoAdmin(admin.ModelAdmin):
-    list_display = ('address', 'phone', 'email', 'office_hours')
-    save_on_top = True
-    fields = ('page_title', 'header_image', 'header_image_url', 'address', 'phone', 'email', 'office_hours', 'google_maps_embed')
-
-    def has_add_permission(self, request):
-        if self.model.objects.count() >= 1:
-            return False
-        return super().has_add_permission(request)
-
 
 @admin.register(ContactMessage)
 class ContactMessageAdmin(admin.ModelAdmin):
