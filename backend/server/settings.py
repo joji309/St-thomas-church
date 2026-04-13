@@ -255,10 +255,7 @@ JAZZMIN_SETTINGS = {
     'default_icon_parents': 'fas fa-folder',
     'default_icon_children': 'fas fa-circle',
 
-    'related_modal_active': True,
-    'use_google_fonts_cdn': True,
     'show_ui_builder': False,
-    'changeform_format': 'single',
 }
 
 JAZZMIN_UI_TWEAKS = {

@@ -177,6 +177,7 @@ class BlogPostAdmin(admin.ModelAdmin):
 class ContactInfoAdmin(admin.ModelAdmin):
     list_display = ('address', 'phone', 'email')
     save_on_top = True
+    save_on_bottom = True
     fields = ('page_title', 'header_image', 'header_image_url',
               'address', 'phone', 'email', 'office_hours',
               'google_maps_embed')
@@ -185,6 +186,12 @@ class ContactInfoAdmin(admin.ModelAdmin):
         if self.model.objects.count() >= 1:
             return False
         return super().has_add_permission(request)
+    
+    def has_change_permission(self, request, obj=None):
+        return True
+
+    def has_delete_permission(self, request, obj=None):
+        return True
 
 
 @admin.register(ContactMessage)
