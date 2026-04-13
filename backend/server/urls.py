@@ -20,13 +20,17 @@ from django.views.generic import TemplateView
 from django.conf import settings
 from django.conf.urls.static import static
 
+from django.views.static import serve
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
 ]
 
-# Serve media files (in development always, in production if requested/needed)
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve media files (Forced for Render monolith setup)
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+]
 
 # Catch-all for React fallback (must be at the end)
 urlpatterns += [
