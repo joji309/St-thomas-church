@@ -177,6 +177,8 @@ class BlogPostAdmin(admin.ModelAdmin):
 class ContactInfoAdmin(admin.ModelAdmin):
     list_display = ('address', 'phone', 'email')
     save_on_top = True
+    save_as_continue = True  # Enables "Save and continue editing"
+    
     fieldsets = (
         ('Page Content', {
             'fields': ('page_title', 'header_image', 'header_image_url'),
@@ -189,6 +191,10 @@ class ContactInfoAdmin(admin.ModelAdmin):
         }),
     )
     
+    # We unlock these to ensure ALL buttons (Save, Delete, Add another) appear exactly like your screenshot
+    def has_add_permission(self, request):
+        return True
+
     def has_change_permission(self, request, obj=None):
         return True
 
