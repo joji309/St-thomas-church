@@ -175,23 +175,7 @@ class BlogPostAdmin(admin.ModelAdmin):
 
 @admin.register(ContactInfo)
 class ContactInfoAdmin(admin.ModelAdmin):
-    list_display = ('address', 'phone', 'email')
-    save_on_top = True
-    save_on_bottom = True
-    fields = ('page_title', 'header_image', 'header_image_url',
-              'address', 'phone', 'email', 'office_hours',
-              'google_maps_embed')
-
-    def has_add_permission(self, request):
-        if self.model.objects.count() >= 1:
-            return False
-        return super().has_add_permission(request)
-    
-    def has_change_permission(self, request, obj=None):
-        return True
-
-    def has_delete_permission(self, request, obj=None):
-        return True
+    pass
 
 
 @admin.register(ContactMessage)
@@ -226,20 +210,7 @@ class PrayerRequestAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return False
+
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
-    list_display = ('site_name', 'site_tagline')
-    save_on_top = True
-    fieldsets = (
-        ('Branding', {
-            'fields': ('site_name', 'site_tagline', 'logo', 'logo_url', 'favicon'),
-        }),
-        ('Social Links', {
-            'fields': ('facebook_url', 'instagram_url', 'youtube_url'),
-        }),
-    )
-
-    def has_add_permission(self, request):
-        if self.model.objects.count() >= 1:
-            return False
-        return super().has_add_permission(request)
+    pass
