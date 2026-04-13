@@ -252,6 +252,12 @@ class BlogPost(models.Model):
 # ─────────────────────────────────────────────────────────────
 
 class ContactInfo(models.Model):
+    # Page Header
+    page_title = models.CharField(max_length=100, default='Contact Us')
+    header_image = models.ImageField(upload_to='contact/', blank=True, null=True)
+    header_image_url = models.URLField(max_length=500, blank=True, null=True, help_text="External image URL (fallback)")
+
+    # Details
     address = models.CharField(max_length=300, default='Tivim, Bardez, Goa - 403502')
     phone = models.CharField(max_length=50, default='+91 832 226 xxxx')
     email = models.EmailField(default='stthomas.tivim@example.com')
@@ -265,6 +271,12 @@ class ContactInfo(models.Model):
 
     def __str__(self):
         return "Contact Information"
+
+    @property
+    def get_header_image_url(self):
+        if self.header_image:
+            return self.header_image.url
+        return self.header_image_url
 
 
 class ContactMessage(models.Model):

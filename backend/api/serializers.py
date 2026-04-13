@@ -104,7 +104,9 @@ class PrayerRequestSerializer(serializers.ModelSerializer):
 class ContactInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = ContactInfo
-        fields = ['id', 'address', 'phone', 'email', 'office_hours', 'google_maps_embed']
+        fields = ['id', 'page_title', 'header_image_url', 'address', 'phone', 'email', 'office_hours', 'google_maps_embed']
+
+    header_image_url = serializers.ReadOnlyField(source='get_header_image_url')
 
 
 

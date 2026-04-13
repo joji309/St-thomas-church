@@ -59,11 +59,11 @@ const Contact = () => {
     <div className="min-h-screen">
       {/* Header */}
       <div className="relative h-64 md:h-80 bg-navy-blue overflow-hidden">
-        <img src="/images/contact-bg.jpg" alt="Contact" className="w-full h-full object-cover opacity-20" />
+        <img src={info.header_image_url || "/images/contact-bg.jpg"} alt={info.page_title} className="w-full h-full object-cover opacity-20" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <p className="text-liturgical-gold text-sm uppercase tracking-[0.3em] font-sans mb-3">Get In Touch</p>
-            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white">Contact Us</h1>
+            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white">{info.page_title || 'Contact Us'}</h1>
             <div className="w-16 h-0.5 bg-liturgical-gold mx-auto mt-4" />
           </motion.div>
         </div>

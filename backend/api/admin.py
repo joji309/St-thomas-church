@@ -176,7 +176,7 @@ class BlogPostAdmin(admin.ModelAdmin):
 class ContactInfoAdmin(admin.ModelAdmin):
     list_display = ('address', 'phone', 'email', 'office_hours')
     save_on_top = True
-    fields = ('address', 'phone', 'email', 'office_hours', 'google_maps_embed')
+    fields = ('page_title', 'header_image', 'header_image_url', 'address', 'phone', 'email', 'office_hours', 'google_maps_embed')
 
     def has_add_permission(self, request):
         if self.model.objects.count() >= 1:
