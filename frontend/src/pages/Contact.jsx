@@ -49,21 +49,21 @@ const Contact = () => {
   };
 
   const contactCards = [
-    { icon: MapPin, label: 'Our Location', value: info.address },
-    { icon: Phone, label: 'Phone', value: info.phone },
-    { icon: Mail, label: 'Email', value: info.email },
-    { icon: Clock, label: 'Office Hours', value: info.office_hours },
+    { icon: MapPin, label: 'Our Location', value: info.physical_address },
+    { icon: Phone, label: 'Phone', value: info.contact_phone_number },
+    { icon: Mail, label: 'Email', value: info.contact_email_address },
+    { icon: Clock, label: 'Office Hours', value: info.office_operating_hours },
   ];
 
   return (
     <div className="min-h-screen">
       {/* Header */}
       <div className="relative h-64 md:h-80 bg-navy-blue overflow-hidden">
-        <img src={info.header_image_url || "/images/contact-bg.jpg"} alt={info.page_title} className="w-full h-full object-cover opacity-20" />
+        <img src={info.header_image_url || "/images/contact-bg.jpg"} alt={info.header_title} className="w-full h-full object-cover opacity-20" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
             <p className="text-liturgical-gold text-sm uppercase tracking-[0.3em] font-sans mb-3">Get In Touch</p>
-            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white">{info.page_title || 'Contact Us'}</h1>
+            <h1 className="text-4xl md:text-6xl font-serif font-bold text-white">{info.header_title || 'Contact Us'}</h1>
             <div className="w-16 h-0.5 bg-liturgical-gold mx-auto mt-4" />
           </motion.div>
         </div>
@@ -98,20 +98,20 @@ const Contact = () => {
             <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }}>
               <h2 className="text-3xl font-serif font-bold text-navy-blue mb-6">Find Us Here</h2>
               <div className="rounded-2xl overflow-hidden shadow-lg h-96 relative map-container">
-                {info.google_maps_embed?.startsWith('<iframe') ? (
+                {info.google_maps_iframe_code?.startsWith('<iframe') ? (
                   <div 
                     className="w-full h-full"
                     dangerouslySetInnerHTML={{ 
-                      __html: info.google_maps_embed.replace(/width="[^"]*"/, 'width="100%"').replace(/height="[^"]*"/, 'height="100%"') 
+                      __html: info.google_maps_iframe_code.replace(/width="[^"]*"/, 'width="100%"').replace(/height="[^"]*"/, 'height="100%"') 
                     }} 
                   />
-                ) : info.google_maps_embed ? (
+                ) : info.google_maps_iframe_code ? (
                   /* If it's a raw URL, we try to put it in an iframe */
                   <iframe
                     title="Church Map"
-                    src={info.google_maps_embed.includes('google.com/maps') && !info.google_maps_embed.includes('embed') 
-                      ? info.google_maps_embed.replace('/maps/', '/maps/embed?pb=') // Simple attempt to fix raw map URLs
-                      : info.google_maps_embed}
+                    src={info.google_maps_iframe_code.includes('google.com/maps') && !info.google_maps_iframe_code.includes('embed') 
+                      ? info.google_maps_iframe_code.replace('/maps/', '/maps/embed?pb=') // Simple attempt to fix raw map URLs
+                      : info.google_maps_iframe_code}
                     width="100%"
                     height="100%"
                     style={{ border: 0 }}
@@ -127,7 +127,7 @@ const Contact = () => {
               </div>
               <p className="text-sm text-navy-blue/50 font-sans mt-3 flex items-center space-x-1">
                 <MapPin className="h-4 w-4 text-liturgical-gold" />
-                <span>St. Thomas Catholic Church, {info.address}</span>
+                <span>St. Thomas Catholic Church, {info.physical_address}</span>
               </p>
             </motion.div>
 

@@ -59,7 +59,7 @@ export const blogAPI = {
 
 // ─── CONTACT ─────────────────────────────
 export const contactInfoAPI = {
-    get: () => api.get('/contact-info/'),
+    get: () => api.get('/contact-settings/'),
 };
 
 export const contactMessageAPI = {

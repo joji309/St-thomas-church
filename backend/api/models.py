@@ -251,32 +251,37 @@ class BlogPost(models.Model):
 # CONTACT PAGE
 # ─────────────────────────────────────────────────────────────
 
-class ContactInfo(models.Model):
-    # Page Header
-    page_title = models.CharField(max_length=100, default='Contact Us')
-    header_image = models.ImageField(upload_to='contact/', blank=True, null=True)
-    header_image_url = models.URLField(max_length=500, blank=True, null=True, help_text="External image URL (fallback)")
+class ContactPageSettings(models.Model):
+    """
+    Brand new model for managing the Contact Us page and Footer info.
+    Using a new table name to ensure a 100% fresh start.
+    """
+    # Header Section
+    header_title = models.CharField(max_length=150, default='Contact Us')
+    header_background_image = models.ImageField(upload_to='contact_page/', blank=True, null=True)
+    header_image_external_url = models.URLField(max_length=500, blank=True, null=True, help_text="Paste a link if not uploading an image")
 
-    # Details
-    address = models.CharField(max_length=300, default='Tivim, Bardez, Goa - 403502')
-    phone = models.CharField(max_length=50, default='+91 832 226 xxxx')
-    email = models.EmailField(default='stthomas.tivim@example.com')
-    office_hours = models.CharField(max_length=100, default='Mon–Sat, 9 AM – 5 PM')
-    google_maps_embed = models.TextField(blank=True, help_text="Paste the full Google Maps <iframe> code here")
+    # The Core Details
+    physical_address = models.TextField(default='Tivim, Bardez, Goa - 403502')
+    contact_phone_number = models.CharField(max_length=100, default='+91 832 226 xxxx')
+    contact_email_address = models.EmailField(default='stthomas.tivim@example.com')
+    office_operating_hours = models.CharField(max_length=150, default='Mon–Sat, 9 AM – 5 PM')
+    
+    # The Map
+    google_maps_iframe_code = models.TextField(blank=True, help_text="Paste the Share -> Embed code from Google Maps here")
 
     class Meta:
-        verbose_name = 'Contact Info'
-        verbose_name_plural = 'Contact Info'
-
+        verbose_name = 'Contact Page Configuration'
+        verbose_name_plural = 'Contact Page Configuration'
 
     def __str__(self):
-        return "Contact Information"
+        return self.header_title
 
     @property
-    def get_header_image_url(self):
-        if self.header_image:
-            return self.header_image.url
-        return self.header_image_url
+    def final_header_image(self):
+        if self.header_background_image:
+            return self.header_background_image.url
+        return self.header_image_external_url or "/images/contact-bg.jpg"
 
 
 class ContactMessage(models.Model):

@@ -38,15 +38,15 @@ const Footer = ({ settings, contact }) => {
             <ul className="space-y-4 text-sm text-white/70">
               <li className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-liturgical-gold shrink-0" />
-                <span>{contact?.address || settings?.site_tagline || 'Tivim, Bardez, Goa - 403502, India'}</span>
+                <span>{contact?.physical_address || settings?.site_tagline || 'Tivim, Bardez, Goa - 403502, India'}</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-liturgical-gold shrink-0" />
-                <span>{contact?.phone || '+91 832 226 xxxx'}</span>
+                <span>{contact?.contact_phone_number || '+91 832 226 xxxx'}</span>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-liturgical-gold shrink-0" />
-                <span>{contact?.email || 'stthomas.tivim@example.com'}</span>
+                <span>{contact?.contact_email_address || 'stthomas.tivim@example.com'}</span>
               </li>
             </ul>
           </div>

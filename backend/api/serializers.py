@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import (
     BlogPost, Notice, PrayerRequest, GalleryImage, HeroSlide,
     MassTiming, WelcomeMessage, Announcement, TimelineEvent,
-    TeamMember, AboutPage, ContactInfo, ContactMessage, SiteSettings,
+    TeamMember, AboutPage, ContactPageSettings, ContactMessage, SiteSettings,
     GalleryCategory
 )
 
@@ -101,12 +101,17 @@ class PrayerRequestSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class ContactInfoSerializer(serializers.ModelSerializer):
+class ContactPageSettingsSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ContactInfo
-        fields = ['id', 'page_title', 'header_image_url', 'address', 'phone', 'email', 'office_hours', 'google_maps_embed']
+        model = ContactPageSettings
+        fields = [
+            'id', 'header_title', 'header_image_url', 
+            'physical_address', 'contact_phone_number', 
+            'contact_email_address', 'office_operating_hours', 
+            'google_maps_iframe_code'
+        ]
 
-    header_image_url = serializers.ReadOnlyField(source='get_header_image_url')
+    header_image_url = serializers.ReadOnlyField(source='final_header_image')
 
 
 

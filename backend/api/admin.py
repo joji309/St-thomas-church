@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import (
     HeroSlide, MassTiming, WelcomeMessage, Announcement,
     TimelineEvent, TeamMember, AboutPage, GalleryImage,
-    BlogPost, ContactInfo, ContactMessage, Notice, PrayerRequest, SiteSettings,
+    BlogPost, ContactPageSettings, ContactMessage, Notice, PrayerRequest, SiteSettings,
     GalleryCategory
 )
 
@@ -171,6 +171,11 @@ class BlogPostAdmin(admin.ModelAdmin):
 # ═══════════════════════════════════════════════════════════════
 # CONTACT
 # ═══════════════════════════════════════════════════════════════
+@admin.register(ContactPageSettings)
+class ContactPageSettingsAdmin(admin.ModelAdmin):
+    list_display = ('header_title', 'contact_phone_number', 'contact_email_address')
+    save_on_top = True
+
 
 
 

@@ -5,7 +5,7 @@ from .views import (
     HeroSlideViewSet, MassTimingViewSet, WelcomeMessageViewSet,
     AnnouncementViewSet, TimelineEventViewSet, TeamMemberViewSet,
     AboutPageViewSet, GalleryImageViewSet, BlogPostViewSet,
-    ContactInfoViewSet, ContactMessageViewSet,
+    ContactPageSettingsViewSet, ContactMessageViewSet,
     NoticeViewSet, PrayerRequestViewSet, SiteSettingsViewSet,
     GalleryCategoryViewSet
 )
@@ -34,7 +34,7 @@ router.register(r'gallery', GalleryImageViewSet)
 router.register(r'blog', BlogPostViewSet)
 
 # Contact
-router.register(r'contact-info', ContactInfoViewSet)
+router.register(r'contact-settings', ContactPageSettingsViewSet)
 router.register(r'contact-messages', ContactMessageViewSet)
 
 # Common

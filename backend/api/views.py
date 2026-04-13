@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from .models import (
     BlogPost, Notice, PrayerRequest, GalleryImage, HeroSlide,
     MassTiming, WelcomeMessage, Announcement, TimelineEvent,
-    TeamMember, AboutPage, ContactInfo, ContactMessage, SiteSettings,
+    TeamMember, AboutPage, ContactPageSettings, ContactMessage, SiteSettings,
     GalleryCategory
 )
 
@@ -14,7 +14,7 @@ from .serializers import (
     BlogPostSerializer, NoticeSerializer, PrayerRequestSerializer,
     GalleryImageSerializer, HeroSlideSerializer, MassTimingSerializer,
     WelcomeMessageSerializer, AnnouncementSerializer, TimelineEventSerializer,
-    TeamMemberSerializer, AboutPageSerializer, ContactInfoSerializer,
+    TeamMemberSerializer, AboutPageSerializer, ContactPageSettingsSerializer,
     ContactMessageSerializer, SiteSettingsSerializer,
     GalleryCategorySerializer
 )
@@ -95,9 +95,9 @@ class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
 
 # ─── CONTACT ──────────────────────────────────────────────────
 
-class ContactInfoViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = ContactInfo.objects.all()
-    serializer_class = ContactInfoSerializer
+class ContactPageSettingsViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ContactPageSettings.objects.all()
+    serializer_class = ContactPageSettingsSerializer
     permission_classes = [permissions.AllowAny]
 
 
