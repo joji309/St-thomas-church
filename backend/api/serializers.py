@@ -120,7 +120,9 @@ class SiteSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = SiteSettings
         fields = ['id', 'site_name', 'site_tagline', 'logo_url', 'favicon',
-                  'facebook_url', 'instagram_url', 'youtube_url']
+                  'facebook_url', 'instagram_url', 'youtube_url',
+                  'footer_mission_statement', 'footer_copyright_text',
+                  'footer_privacy_policy_url', 'footer_terms_url']
 
     def get_logo_url(self, obj):
         if obj.logo:

@@ -338,6 +338,19 @@ class SiteSettings(models.Model):
     instagram_url = models.URLField(blank=True, null=True)
     youtube_url = models.URLField(blank=True, null=True)
 
+    # Footer Content
+    footer_mission_statement = models.TextField(
+        default='Serving the faithful of Tivim, Goa. A beacon of faith, hope, and community in the heart of our village.',
+        help_text="The short description that appears under the logo in the footer"
+    )
+    footer_copyright_text = models.CharField(
+        max_length=200, 
+        default='St. Thomas Church, Tivim, Goa. All rights reserved.',
+        help_text="Custom copyright text (e.g. Church Name, Address)"
+    )
+    footer_privacy_policy_url = models.CharField(max_length=200, default='#')
+    footer_terms_url = models.CharField(max_length=200, default='#')
+
     class Meta:
         verbose_name = 'Site Settings'
         verbose_name_plural = 'Site Settings'

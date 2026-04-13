@@ -13,12 +13,10 @@ import Contact from './pages/Contact';
 import News from './pages/News';
 import PageTransition from './components/PageTransition';
 
-import { siteSettingsAPI } from './api';
-
-
-
+import { siteSettingsAPI, contactInfoAPI } from './api';
 function App() {
   const [settings, setSettings] = useState(null);
+  const [contact, setContact] = useState(null);
 
   useEffect(() => {
     siteSettingsAPI.get()
@@ -28,6 +26,14 @@ function App() {
         }
       })
       .catch(err => console.error("Error fetching site settings:", err));
+
+    contactInfoAPI.get()
+      .then(res => {
+        if (res.data && res.data.length > 0) {
+          setContact(res.data[0]);
+        }
+      })
+      .catch(err => console.error("Error fetching contact info:", err));
   }, []);
 
   return (
@@ -51,7 +57,7 @@ function App() {
 
             </PageTransition>
           </main>
-          <Footer settings={settings} />
+          <Footer settings={settings} contact={contact} />
         </div>
       </Router>
     </ErrorBoundary>
