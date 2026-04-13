@@ -28,7 +28,8 @@ def main():
     execute_from_command_line(['manage.py', 'migrate'])
     
     # Check if admin exists
-    if not User.objects.filter(username='admin').exists():
+    admin_user = User.objects.filter(username='admin').first()
+    if not admin_user:
         print("\n👤 Creating superuser...")
         User.objects.create_superuser(
             username='admin',
@@ -36,11 +37,14 @@ def main():
             password='admin12345'
         )
         print("✅ Superuser created!")
-        print("   Username: admin")
-        print("   Password: admin12345")
-        print("   ⚠️  Change this password immediately in the Django admin!")
     else:
-        print("✅ Superuser already exists")
+        print("\n👤 Admin already exists, updating password...")
+        admin_user.set_password('admin12345')
+        admin_user.save()
+        print("✅ Password updated to: admin12345")
+    
+    print("   Username: admin")
+    print("   Password: admin12345")
     
     print("\n✅ Setup complete!")
     print("📝 Next steps:")
