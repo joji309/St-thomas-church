@@ -176,12 +176,7 @@ class BlogPostAdmin(admin.ModelAdmin):
 class ContactInfoAdmin(admin.ModelAdmin):
     list_display = ('address', 'phone', 'email', 'office_hours')
     save_on_top = True
-    fieldsets = (
-        (None, {
-            'fields': ('address', 'phone', 'email', 'office_hours', 'google_maps_embed'),
-            'description': 'Enter your contact details and paste the full Google Maps <iframe> code below.'
-        }),
-    )
+    fields = ('address', 'phone', 'email', 'office_hours', 'google_maps_embed')
 
     def has_add_permission(self, request):
         if self.model.objects.count() >= 1:
