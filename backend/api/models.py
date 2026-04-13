@@ -302,6 +302,25 @@ class ContactMessage(models.Model):
 
 
 # ─────────────────────────────────────────────────────────────
+# BIBLE VERSES
+# ─────────────────────────────────────────────────────────────
+
+class BibleVerse(models.Model):
+    verse_text = models.TextField(help_text="The scripture text")
+    reference = models.CharField(max_length=100, help_text="e.g. John 3:16")
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['-created_at']
+        verbose_name = 'Daily Bible Verse'
+        verbose_name_plural = 'Daily Bible Verses'
+
+    def __str__(self):
+        return self.reference
+
+
+# ─────────────────────────────────────────────────────────────
 # COMMON
 # ─────────────────────────────────────────────────────────────
 

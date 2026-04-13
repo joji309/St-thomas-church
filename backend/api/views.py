@@ -6,7 +6,7 @@ from .models import (
     BlogPost, Notice, PrayerRequest, GalleryImage, HeroSlide,
     MassTiming, WelcomeMessage, Announcement, TimelineEvent,
     TeamMember, AboutPage, ContactPageSettings, ContactMessage, SiteSettings,
-    GalleryCategory
+    GalleryCategory, BibleVerse
 )
 
 
@@ -16,7 +16,7 @@ from .serializers import (
     WelcomeMessageSerializer, AnnouncementSerializer, TimelineEventSerializer,
     TeamMemberSerializer, AboutPageSerializer, ContactPageSettingsSerializer,
     ContactMessageSerializer, SiteSettingsSerializer,
-    GalleryCategorySerializer
+    GalleryCategorySerializer, BibleVerseSerializer
 )
 
 
@@ -116,6 +116,12 @@ class ContactMessageViewSet(viewsets.ModelViewSet):
 class SiteSettingsViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = SiteSettings.objects.all()
     serializer_class = SiteSettingsSerializer
+    permission_classes = [permissions.AllowAny]
+
+
+class BibleVerseViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = BibleVerse.objects.filter(is_active=True)
+    serializer_class = BibleVerseSerializer
     permission_classes = [permissions.AllowAny]
 
 

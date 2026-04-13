@@ -79,5 +79,9 @@ export const siteSettingsAPI = {
     get: () => api.get('/site-settings/'),
 };
 
+export const bibleVerseAPI = {
+    getAll: () => api.get('/bible-verses/'),
+};
+
 export default api;
 

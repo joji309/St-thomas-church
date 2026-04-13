@@ -3,7 +3,7 @@ from .models import (
     HeroSlide, MassTiming, WelcomeMessage, Announcement,
     TimelineEvent, TeamMember, AboutPage, GalleryImage,
     BlogPost, ContactPageSettings, ContactMessage, Notice, PrayerRequest, SiteSettings,
-    GalleryCategory
+    GalleryCategory, BibleVerse
 )
 
 
@@ -213,6 +213,16 @@ class PrayerRequestAdmin(admin.ModelAdmin):
     def has_add_permission(self, request):
         return False
 
+# ═══════════════════════════════════════════════════════════════
+# BIBLE VERSES
+# ═══════════════════════════════════════════════════════════════
+
+@admin.register(BibleVerse)
+class BibleVerseAdmin(admin.ModelAdmin):
+    list_display = ('reference', 'is_active', 'created_at')
+    list_filter = ('is_active',)
+    search_fields = ('reference', 'verse_text')
+    list_editable = ('is_active',)
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
     pass

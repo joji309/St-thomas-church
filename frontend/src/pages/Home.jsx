@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Clock, Quote, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Clock, Quote, ArrowRight, Church } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { heroAPI, massTimingAPI, welcomeAPI, announcementAPI, noticeAPI } from '../api';
+import { heroAPI, massTimingAPI, welcomeAPI, announcementAPI, noticeAPI, bibleVerseAPI } from '../api';
 import { AlertTriangle, Info, Bell } from 'lucide-react';
 
 const fadeInUp = {
@@ -360,11 +360,58 @@ const Announcements = () => {
   );
 };
 
+// ═══════════════════════════════════════════════════════════════
+// DAILY BIBLE VERSE
+// ═══════════════════════════════════════════════════════════════
+
+const DailyVerse = () => {
+  const [verse, setVerse] = useState(null);
+
+  useEffect(() => {
+    const fetchVerse = async () => {
+      try {
+        const res = await bibleVerseAPI.getAll();
+        if (res.data.length > 0) setVerse(res.data[0]);
+      } catch (err) { console.error("Error fetching bible verse:", err); }
+    };
+    fetchVerse();
+  }, []);
+
+  if (!verse) return null;
+
+  return (
+    <section className="py-24 bg-white relative overflow-hidden">
+      {/* Decorative religious symbol watermark */}
+      <div className="absolute -right-20 -top-20 opacity-5 pointer-events-none select-none">
+        <Church className="w-96 h-96 text-navy-blue" />
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 text-center">
+        <motion.div variants={fadeInUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
+          <Quote className="h-10 w-10 text-liturgical-gold mx-auto mb-8 opacity-40" />
+          <h2 className="text-liturgical-gold text-xs uppercase tracking-[0.4em] font-sans mb-6">Daily Scripture</h2>
+          
+          <p className="text-2xl md:text-4xl font-serif font-bold text-navy-blue leading-relaxed mb-8 italic">
+            "{verse.verse_text}"
+          </p>
+          
+          <div className="w-12 h-1 bg-liturgical-gold mx-auto mb-6" />
+          
+          <p className="text-lg font-serif font-bold text-navy-blue uppercase tracking-widest">
+            — {verse.reference} —
+          </p>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
 const Home = () => (
   <div>
     <HeroCarousel />
     <ImportantNotices />
     <MassTimings />
+    <DailyVerse />
     <WelcomeMessage />
     <Announcements />
   </div>

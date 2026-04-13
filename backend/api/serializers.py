@@ -3,7 +3,7 @@ from .models import (
     BlogPost, Notice, PrayerRequest, GalleryImage, HeroSlide,
     MassTiming, WelcomeMessage, Announcement, TimelineEvent,
     TeamMember, AboutPage, ContactPageSettings, ContactMessage, SiteSettings,
-    GalleryCategory
+    GalleryCategory, BibleVerse
 )
 
 
@@ -139,4 +139,7 @@ class SiteSettingsSerializer(serializers.ModelSerializer):
             return obj.logo.url # Fallback if no request context
         return obj.logo_url
 
-
+class BibleVerseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BibleVerse
+        fields = '__all__'

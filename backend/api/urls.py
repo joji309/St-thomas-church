@@ -7,7 +7,7 @@ from .views import (
     AboutPageViewSet, GalleryImageViewSet, BlogPostViewSet,
     ContactPageSettingsViewSet, ContactMessageViewSet,
     NoticeViewSet, PrayerRequestViewSet, SiteSettingsViewSet,
-    GalleryCategoryViewSet
+    GalleryCategoryViewSet, BibleVerseViewSet
 )
 
 
@@ -42,6 +42,7 @@ router.register(r'notices', NoticeViewSet)
 router.register(r'prayer-requests', PrayerRequestViewSet)
 
 router.register(r'site-settings', SiteSettingsViewSet)
+router.register(r'bible-verses', BibleVerseViewSet)
 
 
 urlpatterns = [
