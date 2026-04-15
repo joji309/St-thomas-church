@@ -12,11 +12,13 @@
       }
     }
   ],
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.py" },
+    { "source": "/admin(.*)", "destination": "/api/index.py" },
+    { "source": "/static/admin/(.*)", "destination": "/api/index.py" },
+    { "source": "/media/(.*)", "destination": "/api/index.py" }
+  ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.py" },
-    { "src": "/admin(.*)", "dest": "/api/index.py" },
-    { "src": "/static/admin/(.*)", "dest": "/api/index.py" },
-    { "src": "/media/(.*)", "dest": "/api/index.py" },
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ],
