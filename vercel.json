@@ -1,7 +1,7 @@
 {
   "version": 2,
   "functions": {
-    "vercel_app.py": {
+    "api/index.py": {
       "runtime": "python3.12",
       "memory": 1024,
       "maxDuration": 60
@@ -10,23 +10,23 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/vercel_app.py"
+      "destination": "/api/index.py"
     },
     {
       "source": "/admin",
-      "destination": "/vercel_app.py"
+      "destination": "/api/index.py"
     },
     {
       "source": "/admin/(.*)",
-      "destination": "/vercel_app.py"
+      "destination": "/api/index.py"
     },
     {
       "source": "/static/admin/(.*)",
-      "destination": "/vercel_app.py"
+      "destination": "/api/index.py"
     },
     {
       "source": "/media/(.*)",
-      "destination": "/vercel_app.py"
+      "destination": "/api/index.py"
     },
     {
       "source": "/((?!api|admin|static|media).*)",
@@ -40,6 +40,7 @@
     "DJANGO_SETTINGS_MODULE": "server.settings",
     "PYTHONUNBUFFERED": "1",
     "DEBUG": "False",
-    "DISABLE_COLLECTSTATIC": "1"
+    "DISABLE_COLLECTSTATIC": "1",
+    "PYTHONPATH": "backend"
   }
 }
