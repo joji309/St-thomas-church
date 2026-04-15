@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY', default='django-insecure-^&g^q7yci53*0i+tf7=ho
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1', cast=Csv())
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,.vercel.app', cast=Csv())
 
 
 # Application definition
@@ -127,7 +127,7 @@ STATICFILES_DIRS = [
     BASE_DIR / '../frontend/dist',
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Media files
 MEDIA_URL = '/media/'
@@ -153,6 +153,9 @@ if not DEBUG:
         'img-src': ('\'self\'', 'data:', 'https:'),
         'font-src': ('\'self\'',),
     }
+
+    # Trust Vercel's proxy for HTTPS detection
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Logging configuration
 LOGGING = {

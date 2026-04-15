@@ -24,30 +24,30 @@ def main():
     """Run migrations and create superuser if needed"""
     
     # Run migrations
-    print("🔄 Running database migrations...")
+    print("Running database migrations...")
     execute_from_command_line(['manage.py', 'migrate'])
     
     # Check if admin exists
     admin_user = User.objects.filter(username='admin').first()
     if not admin_user:
-        print("\n👤 Creating superuser...")
+        print("\nCreating superuser...")
         User.objects.create_superuser(
             username='admin',
             email='admin@example.com',
             password='admin12345'
         )
-        print("✅ Superuser created!")
+        print("Superuser created!")
     else:
-        print("\n👤 Admin already exists, updating password...")
+        print("\nAdmin already exists, updating password...")
         admin_user.set_password('admin12345')
         admin_user.save()
-        print("✅ Password updated to: admin12345")
+        print("Password updated to: admin12345")
     
     print("   Username: admin")
     print("   Password: admin12345")
     
-    print("\n✅ Setup complete!")
-    print("📝 Next steps:")
+    print("\nSetup complete!")
+    print("Next steps:")
     print("   1. Go to /admin/ and log in")
     print("   2. Add your site content")
     print("   3. Update the password if using default")
