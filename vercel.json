@@ -14,30 +14,29 @@
       "includeFiles": "backend/**"
     }
   },
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/api/index.py"
+      "handle": "filesystem"
     },
     {
-      "source": "/admin",
-      "destination": "/api/index.py"
+      "src": "/api/(.*)",
+      "dest": "/api/index.py"
     },
     {
-      "source": "/admin/(.*)",
-      "destination": "/api/index.py"
+      "src": "/admin(.*)",
+      "dest": "/api/index.py"
     },
     {
-      "source": "/static/admin/(.*)",
-      "destination": "/api/index.py"
+      "src": "/static/(.*)",
+      "dest": "/api/index.py"
     },
     {
-      "source": "/media/(.*)",
-      "destination": "/api/index.py"
+      "src": "/media/(.*)",
+      "dest": "/api/index.py"
     },
     {
-      "source": "/((?!api|admin|static|media|assets|favicon.ico).*)",
-      "destination": "/index.html"
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ],
   "buildCommand": "cd frontend && npm install && npm run build",
