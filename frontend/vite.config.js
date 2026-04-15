@@ -9,11 +9,6 @@ export default defineConfig({
     outDir: 'dist',
     sourcemap: false,
     minify: 'esbuild',
-    rollupOptions: {
-      input: {
-        main: '/frontend/index.html',
-      }
-    }
   },
   server: {
     proxy: {
