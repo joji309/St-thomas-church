@@ -6,7 +6,7 @@ from django.core.wsgi import get_wsgi_application
 
 # Add the backend directory to the sys.path
 # This allows Django to find the 'server' module and any apps inside 'backend'
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(BASE_DIR / 'backend'))
 
 # Set environment variables
