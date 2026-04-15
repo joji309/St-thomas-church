@@ -1,0 +1,13 @@
+db.sqlite3
+*.pyc
+__pycache__/
+.env
+.env.local
+.git
+node_modules
+frontend/node_modules
+venv
+.venv
+*.egg-info
+build/
+

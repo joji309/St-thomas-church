@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && npm install && npm run build",
+  "buildCommand": "npm --prefix frontend install && npm --prefix frontend run build",
   "outputDirectory": "frontend/dist",
   "builds": [
     {
@@ -14,10 +14,11 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/index.py" },
-    { "src": "/admin/(.*)", "dest": "/api/index.py" },
+    { "src": "/admin(.*)", "dest": "/api/index.py" },
+    { "src": "/static/admin(.*)", "dest": "/api/index.py" },
     { "src": "/media/(.*)", "dest": "/api/index.py" },
     { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/.*", "dest": "/index.html" }
   ],
   "env": {
     "DJANGO_SETTINGS_MODULE": "server.settings",
