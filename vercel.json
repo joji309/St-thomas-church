@@ -4,7 +4,7 @@
   "outputDirectory": "frontend/dist",
   "installCommand": "npm install --prefix frontend",
   "functions": {
-    "api/index.py": {
+    "vercel_app.py": {
       "runtime": "python3.12",
       "memory": 1024,
       "maxDuration": 60
@@ -13,23 +13,19 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "api/index.py"
+      "dest": "vercel_app.py"
     },
     {
-      "src": "/admin",
-      "dest": "api/index.py"
-    },
-    {
-      "src": "/admin/(.*)",
-      "dest": "api/index.py"
+      "src": "/admin(.*)",
+      "dest": "vercel_app.py"
     },
     {
       "src": "/static/admin/(.*)",
-      "dest": "api/index.py"
+      "dest": "vercel_app.py"
     },
     {
       "src": "/media/(.*)",
-      "dest": "api/index.py"
+      "dest": "vercel_app.py"
     },
     {
       "handle": "filesystem"
