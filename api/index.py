@@ -1,31 +1,19 @@
-"""
-Vercel serverless function handler for Django REST API
-This serves all API requests for the St. Thomas Church website
-"""
-
 import os
 import sys
-import django
 from pathlib import Path
+import django
+from django.core.wsgi import get_wsgi_application
 
-# Add backend to path
+# Add the backend directory to the sys.path
+# This allows Django to find the 'server' module and any apps inside 'backend'
 BASE_DIR = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_DIR / 'backend'))
 
-# Setup Django
+# Set environment variables
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'server.settings')
-django.setup()
 
-from django.core.wsgi import get_wsgi_application
+# Initialize Django
+# django.setup() # get_wsgi_application() calls this
 
-# Get the WSGI application
+# Export the WSGI application as 'app' for Vercel
 app = get_wsgi_application()
-
-
-def handler(request, response):
-    """
-    Vercel serverless function handler (updated for Python 3.12)
-    Routes all requests through Django WSGI
-    """
-    # Call the Django WSGI app
-    return app(request, response)
