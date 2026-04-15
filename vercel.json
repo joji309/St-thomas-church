@@ -1,8 +1,5 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/dist",
-  "installCommand": "npm install --prefix frontend",
   "functions": {
     "vercel_app.py": {
       "runtime": "python3.12",
@@ -10,31 +7,35 @@
       "maxDuration": 60
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "vercel_app.py"
+      "source": "/api/(.*)",
+      "destination": "/vercel_app.py"
     },
     {
-      "src": "/admin(.*)",
-      "dest": "vercel_app.py"
+      "source": "/admin",
+      "destination": "/vercel_app.py"
     },
     {
-      "src": "/static/admin/(.*)",
-      "dest": "vercel_app.py"
+      "source": "/admin/(.*)",
+      "destination": "/vercel_app.py"
     },
     {
-      "src": "/media/(.*)",
-      "dest": "vercel_app.py"
+      "source": "/static/admin/(.*)",
+      "destination": "/vercel_app.py"
     },
     {
-      "handle": "filesystem"
+      "source": "/media/(.*)",
+      "destination": "/vercel_app.py"
     },
     {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "source": "/((?!api|admin|static|media).*)",
+      "destination": "/index.html"
     }
   ],
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "installCommand": "npm install --prefix frontend",
   "env": {
     "DJANGO_SETTINGS_MODULE": "server.settings",
     "PYTHONUNBUFFERED": "1",
