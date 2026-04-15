@@ -2,7 +2,7 @@
   "version": 2,
   "buildCommand": "cd frontend && npm install && npm run build",
   "outputDirectory": "frontend/dist",
-  "installCommand": "pip install -r backend/requirements.txt && npm install --prefix frontend",
+  "installCommand": "npm install --prefix frontend",
   "functions": {
     "api/index.py": {
       "runtime": "python3.12",
