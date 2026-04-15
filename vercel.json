@@ -1,47 +1,36 @@
 {
   "version": 2,
-  "functions": {
-    "api/index.py": {
-      "runtime": "python3.12",
-      "memory": 1024,
-      "maxDuration": 60,
-      "includeFiles": "backend/**"
-    },
-    "server/wsgi.py": {
-      "runtime": "python3.12",
-      "memory": 1024,
-      "maxDuration": 60,
-      "includeFiles": "backend/**"
-    }
-  },
-  "routes": [
+  "builds": [
     {
-      "handle": "filesystem"
+      "src": "frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/api/index.py"
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "includeFiles": "backend/**"
+      }
     },
     {
-      "src": "/admin(.*)",
-      "dest": "/api/index.py"
-    },
-    {
-      "src": "/static/(.*)",
-      "dest": "/api/index.py"
-    },
-    {
-      "src": "/media/(.*)",
-      "dest": "/api/index.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/index.html"
+      "src": "server/wsgi.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "includeFiles": "backend/**"
+      }
     }
   ],
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/dist",
-  "installCommand": "npm install --prefix frontend",
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/index.py" },
+    { "src": "/admin(.*)", "dest": "/api/index.py" },
+    { "src": "/static/admin/(.*)", "dest": "/api/index.py" },
+    { "src": "/media/(.*)", "dest": "/api/index.py" },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ],
   "env": {
     "DJANGO_SETTINGS_MODULE": "server.settings",
     "PYTHONUNBUFFERED": "1",
