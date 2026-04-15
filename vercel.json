@@ -16,6 +16,10 @@
       "destination": "api/index.py"
     },
     {
+      "source": "/admin",
+      "destination": "api/index.py"
+    },
+    {
       "source": "/admin/(.*)",
       "destination": "api/index.py"
     },
@@ -28,7 +32,7 @@
       "destination": "api/index.py"
     },
     {
-      "source": "/((?!api|admin|static/admin|media).*)",
+      "source": "/((?!api|admin|static|media).*)",
       "destination": "/index.html"
     }
   ],
