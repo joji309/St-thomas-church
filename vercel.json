@@ -39,6 +39,7 @@
   "env": {
     "DJANGO_SETTINGS_MODULE": "server.settings",
     "PYTHONUNBUFFERED": "1",
-    "DEBUG": "False"
+    "DEBUG": "False",
+    "DISABLE_COLLECTSTATIC": "1"
   }
 }
