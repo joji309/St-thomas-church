@@ -1,25 +1,24 @@
 {
   "version": 2,
-  "buildCommand": "npm --prefix frontend install && npm --prefix frontend run build",
-  "outputDirectory": "frontend/dist",
+  "buildCommand": "cd frontend && npm install && npm run build",
   "builds": [
     {
       "src": "api/index.py",
       "use": "@vercel/python",
       "config": {
         "maxLambdaSize": "50mb",
-        "includeFiles": ["backend/**", "frontend/dist/**"]
+        "includeFiles": ["backend/**"]
       }
     }
   ],
   "routes": [
-    { "src": "/assets/(.*)", "dest": "/assets/$1" },
     { "src": "/api/(.*)", "dest": "/api/index.py" },
     { "src": "/admin(.*)", "dest": "/api/index.py" },
     { "src": "/static/admin(.*)", "dest": "/api/index.py" },
     { "src": "/media/(.*)", "dest": "/api/index.py" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+    { "src": "/assets/(.+)", "dest": "/frontend/dist/assets/$1" },
+    { "src": "/(.*\\..*)", "dest": "/frontend/dist/$1" },
+    { "src": "/(.*)", "dest": "/frontend/dist/index.html" }
   ],
   "env": {
     "DJANGO_SETTINGS_MODULE": "server.settings",
