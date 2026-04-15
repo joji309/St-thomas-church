@@ -82,12 +82,12 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 import dj_database_url
 
+
+DATABASE_URL = config('DATABASE_URL', default=None)
+if not DATABASE_URL:
+    raise Exception('DATABASE_URL environment variable must be set in production!')
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL', default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}"),
-        conn_max_age=600,
-        conn_health_checks=True,
-    )
+    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600, conn_health_checks=True)
 }
 
 
