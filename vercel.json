@@ -36,7 +36,7 @@
       "destination": "/api/index.py"
     },
     {
-      "source": "/((?!api|admin|static|media).*)",
+      "source": "/((?!api|admin|static|media|assets|favicon.ico).*)",
       "destination": "/index.html"
     }
   ],
