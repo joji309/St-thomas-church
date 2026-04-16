@@ -1,18 +1,27 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/dist",
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index.py" },
-    { "source": "/admin(.*)", "destination": "/api/index.py" },
-    { "source": "/static/admin(.*)", "destination": "/api/index.py" },
-    { "source": "/media/(.*)", "destination": "/api/index.py" },
-    { "source": "/(.*)", "destination": "/index.html" }
+  "builds": [
+    {
+      "src": "api/index.py",
+      "use": "@vercel/python",
+      "config": { "includeFiles": ["backend/**"] }
+    },
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "frontend/dist" }
+    }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "api/index.py" },
+    { "src": "/admin(.*)", "dest": "api/index.py" },
+    { "src": "/static/admin(.*)", "dest": "api/index.py" },
+    { "src": "/media/(.*)", "dest": "api/index.py" },
+    { "src": "/(.*)", "dest": "/index.html" }
   ],
   "env": {
     "DJANGO_SETTINGS_MODULE": "server.settings",
     "PYTHONPATH": "backend:.",
-    "DEBUG": "False",
-    "DISABLE_COLLECTSTATIC": "1"
+    "DEBUG": "False"
   }
 }
