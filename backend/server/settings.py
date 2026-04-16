@@ -148,9 +148,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = []
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-WHITENOISE_USE_FINDERS = True
-WHITENOISE_AUTOREFRESH = True
+# STATICFILES_STORAGE is now defined in STORAGES below
 
 # Path to the frontend dist for WhiteNoise to serve at root
 # This allows /assets/ and /index.html to be served from the root
@@ -167,8 +165,25 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': config('CLOUDINARY_API_SECRET', default=''),
 }
 
+# Media files - use Cloudinary in production
 if not DEBUG or config('USE_CLOUDINARY', default=False, cast=bool):
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    STORAGES = {
+        "default": {
+            "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
+        },
+    }
+else:
+    STORAGES = {
+        "default": {
+            "BACKEND": "django.core.files.storage.FileSystemStorage",
+        },
+        "staticfiles": {
+            "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+        },
+    }
 
 # CORS configuration
 CORS_ALLOWED_ORIGINS = config('CORS_ALLOWED_ORIGINS', default='http://localhost:3000,http://localhost:5173', cast=Csv())
