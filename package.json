@@ -4,12 +4,6 @@
   "description": "St. Thomas Church Website",
   "private": true,
   "scripts": {
-{
-  "name": "st-thomas-church",
-  "version": "1.0.0",
-  "description": "St. Thomas Church Website",
-  "private": true,
-  "scripts": {
     "dev": "cd frontend && npm run dev",
     "build": "cd frontend && npm install && npm run build",
     "preview": "cd frontend && npm run preview",
