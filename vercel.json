@@ -11,7 +11,8 @@
   ],
   "env": {
     "DJANGO_SETTINGS_MODULE": "server.settings",
-    "PYTHONPATH": "backend",
-    "DEBUG": "False"
+    "PYTHONPATH": "backend:.",
+    "DEBUG": "False",
+    "DISABLE_COLLECTSTATIC": "1"
   }
 }
