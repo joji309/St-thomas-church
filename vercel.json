@@ -17,6 +17,7 @@
     { "src": "/admin(.*)", "dest": "api/index.py" },
     { "src": "/static/admin(.*)", "dest": "api/index.py" },
     { "src": "/media/(.*)", "dest": "api/index.py" },
+    { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
   ],
   "env": {
