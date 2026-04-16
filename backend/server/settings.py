@@ -149,7 +149,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = []
 # Use /tmp at runtime (writable in Vercel serverless), fallback to local for dev
 STATIC_ROOT = os.environ.get('STATIC_ROOT', str(BASE_DIR / 'staticfiles'))
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Path to the frontend dist for WhiteNoise to serve at root
 # This allows /assets/ and /index.html to be served from the root
