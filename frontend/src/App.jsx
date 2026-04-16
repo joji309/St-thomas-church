@@ -36,6 +36,49 @@ function App() {
       .catch(err => console.error("Error fetching contact info:", err));
   }, []);
 
+  // Dynamic Favicon Update
+  useEffect(() => {
+    if (settings && settings.favicon_url) {
+      let faviconUrl = settings.favicon_url;
+      
+      // Handle relative paths from Django (ensure they point to the backend)
+      if (faviconUrl.startsWith('/media')) {
+        const backendBase = import.meta.env.VITE_API_BASE_URL 
+          ? import.meta.env.VITE_API_BASE_URL.replace('/api', '') 
+          : '';
+        // Only prepend if backendBase is an absolute URL
+        if (backendBase.startsWith('http')) {
+          faviconUrl = `${backendBase}${faviconUrl}`;
+        }
+      }
+
+      const updateFavicon = (url) => {
+        // Remove existing favicon links to avoid conflicts
+        const links = document.querySelectorAll("link[rel~='icon']");
+        links.forEach(link => link.parentNode.removeChild(link));
+
+        // Create new favicon link
+        const link = document.createElement('link');
+        link.rel = 'icon';
+        
+        // Infer MIME type from file extension
+        const extension = url.split('.').pop().split(/[?#]/)[0].toLowerCase();
+        switch (extension) {
+          case 'svg': link.type = 'image/svg+xml'; break;
+          case 'png': link.type = 'image/png'; break;
+          case 'ico': link.type = 'image/x-icon'; break;
+          case 'gif': link.type = 'image/gif'; break;
+          default: link.type = 'image/x-icon';
+        }
+        
+        link.href = url;
+        document.getElementsByTagName('head')[0].appendChild(link);
+      };
+
+      updateFavicon(faviconUrl);
+    }
+  }, [settings]);
+
   return (
     <ErrorBoundary>
       <Router>

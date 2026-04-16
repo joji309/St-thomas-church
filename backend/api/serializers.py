@@ -123,10 +123,11 @@ class ContactMessageSerializer(serializers.ModelSerializer):
 
 class SiteSettingsSerializer(serializers.ModelSerializer):
     logo_url = serializers.SerializerMethodField()
+    favicon_url = serializers.SerializerMethodField()
 
     class Meta:
         model = SiteSettings
-        fields = ['id', 'site_name', 'site_tagline', 'logo_url', 'favicon',
+        fields = ['id', 'site_name', 'site_tagline', 'logo_url', 'favicon_url',
                   'facebook_url', 'instagram_url', 'youtube_url',
                   'footer_mission_statement', 'footer_copyright_text',
                   'footer_privacy_policy_url', 'footer_terms_url']
@@ -136,8 +137,16 @@ class SiteSettingsSerializer(serializers.ModelSerializer):
             request = self.context.get('request')
             if request:
                 return request.build_absolute_uri(obj.logo.url)
-            return obj.logo.url # Fallback if no request context
+            return obj.logo.url
         return obj.logo_url
+
+    def get_favicon_url(self, obj):
+        if obj.favicon:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.favicon.url)
+            return obj.favicon.url
+        return None
 
 class BibleVerseSerializer(serializers.ModelSerializer):
     class Meta:

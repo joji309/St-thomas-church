@@ -401,3 +401,8 @@ class SiteSettings(models.Model):
             return self.logo.url
         return self.logo_url
 
+    @property
+    def get_favicon_url(self):
+        if self.favicon:
+            return self.favicon.url
+        return None

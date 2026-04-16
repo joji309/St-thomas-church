@@ -32,7 +32,19 @@ urlpatterns += [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
 
+# Serve frontend index.html for all unmatched routes
+urlpatterns += [
+    path('', TemplateView.as_view(template_name='index.html'), name='react-app'),
+]
+
 # Catch-all for React fallback (must be at the end)
 urlpatterns += [
     re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
 ]
+
+# Serve static files during development
+if settings.DEBUG:
+    from django.conf.urls.static import static
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    # Specifically serve the 'assets' folder from frontend/dist
+    urlpatterns += static('/assets/', document_root=settings.BASE_DIR / '../frontend/dist/assets')

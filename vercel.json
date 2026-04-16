@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "buildCommand": "cd frontend && npm install && npm run build",
+  "buildCommand": "python -m pip install -r requirements.txt && cd frontend && npm install && npm run build && python ../backend/manage.py collectstatic --noinput",
   "outputDirectory": "frontend/dist",
   "builds": [
     {
@@ -8,7 +8,7 @@
       "use": "@vercel/python",
       "config": {
         "maxLambdaSize": "50mb",
-        "includeFiles": ["backend/**"]
+        "includeFiles": ["backend/**", "api/**"]
       }
     }
   ],
@@ -24,7 +24,6 @@
     "DJANGO_SETTINGS_MODULE": "server.settings",
     "PYTHONUNBUFFERED": "1",
     "DEBUG": "False",
-    "DISABLE_COLLECTSTATIC": "1",
     "PYTHONPATH": "backend"
   }
 }

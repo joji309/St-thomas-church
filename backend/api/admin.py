@@ -225,4 +225,12 @@ class BibleVerseAdmin(admin.ModelAdmin):
     list_editable = ('is_active',)
 @admin.register(SiteSettings)
 class SiteSettingsAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('site_name', 'site_tagline')
+    
+    def has_add_permission(self, request):
+        if self.model.objects.count() >= 1:
+            return False
+        return super().has_add_permission(request)
+
+    def has_delete_permission(self, request, obj=None):
+        return False
