@@ -149,6 +149,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = []
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 # STATICFILES_STORAGE is now defined in STORAGES below
+WHITENOISE_USE_FINDERS = True
+WHITENOISE_AUTOREFRESH = True
 
 # Path to the frontend dist for WhiteNoise to serve at root
 # This allows /assets/ and /index.html to be served from the root
