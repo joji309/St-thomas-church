@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "cd frontend && npm run dev",
-    "build": "cd frontend && npm install && npm run build && cd .. && pip install --break-system-packages -r api/requirements.txt && python backend/manage.py collectstatic --noinput",
+    "build": "cd frontend && npm install && npm run build && cd .. && pip install --break-system-packages -r api/requirements.txt && export PYTHONPATH=$PYTHONPATH:$(pwd)/backend && python backend/manage.py collectstatic --noinput && cp -a backend/staticfiles_build/static/. frontend/dist/static/",
     "preview": "cd frontend && npm run preview",
     "setup": "cd backend && python setup_admin.py",
     "install-deps": "npm install && cd backend && pip install -r requirements.txt && cd ../frontend && npm install"
