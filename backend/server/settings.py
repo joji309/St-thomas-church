@@ -141,7 +141,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = []
-STATIC_ROOT = BASE_DIR / '..' / 'frontend' / 'public' / 'static'
+STATIC_ROOT = BASE_DIR / '..' / 'frontend' / 'dist' / 'static'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 # Path to the frontend dist for WhiteNoise to serve at root
