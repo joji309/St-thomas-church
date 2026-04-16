@@ -2,27 +2,16 @@
   "version": 2,
   "buildCommand": "cd frontend && npm install && npm run build",
   "outputDirectory": "frontend/dist",
-  "builds": [
-    {
-      "src": "api/index.py",
-      "use": "@vercel/python",
-      "config": {
-        "maxLambdaSize": "50mb",
-        "includeFiles": ["backend/**", "api/**"]
-      }
-    }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/index.py" },
-    { "src": "/admin(.*)", "dest": "/api/index.py" },
-    { "src": "/static/admin(.*)", "dest": "/api/index.py" },
-    { "src": "/media/(.*)", "dest": "/api/index.py" },
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.py" },
+    { "source": "/admin(.*)", "destination": "/api/index.py" },
+    { "source": "/static/admin(.*)", "destination": "/api/index.py" },
+    { "source": "/media/(.*)", "destination": "/api/index.py" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ],
   "env": {
     "DJANGO_SETTINGS_MODULE": "server.settings",
-    "DEBUG": "False",
-    "PYTHONPATH": "backend"
+    "PYTHONPATH": "backend",
+    "DEBUG": "False"
   }
 }
